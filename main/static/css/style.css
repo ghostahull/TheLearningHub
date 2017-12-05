@@ -1,0 +1,17 @@
+body {
+    background-color: #202020;
+}
+
+h1, p {
+    color: #F0F0F0;
+}
+
+.red {
+    color: #FF6060;
+}
+
+.card {
+    background-color: transparent;
+    border-color: transparent;
+    width: 30rem;
+}

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <h1 class="red">LearningHub</h1>
+</div>
+
+<div class="row justify-content-center">
+    <div class="card">
+        <div class="card-body text-center">
+            <p>This site provides learning material for all of those that are interested. Use our browser to search in our wide list of courses.</p>
+        </div>
+    </div>
+</div>
+
+<br style="line-height: 100%;">
+
+<div class="row justify-content-center">
+    <form action="{% url 'courses' %}" method="post">
+        {% csrf_token %}
+        <div class="input-group">
+          <input type="text" name="search" class="form-control input-lg" placeholder="Search" aria-label="Search for...">
+          <span class="input-group-btn">
+            <button class="btn btn-secondary btn-lg" type="button">Go!</button>
+          </span>
+        </div>
+    </form>
+</div>
+
+{% for course in courses %}
+    <div class="row justify-content-center">
+        <div class="card">
+            <div class="card-body text-center">
+                <h5 class="card-title red">{{ course.title }}</h3>
+                <p class="card-text">{{ course.desc }}</p>
+                <a type="button" class="btn btn-primary" href="{{ course.link }}">Download</a>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+{% endblock %}
