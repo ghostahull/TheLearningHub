@@ -1,15 +1,16 @@
 from django import forms
 from .models import Course
-import json
-
+import sqlite3
 
 def syncCourses():
-    conf = json.load(open("conf.json", "r"))
+    db = sqlite3.connect("db.sqlite3")
+    c = db.cursor()
+    c.execute("select * from main_course")
 
-    for course in conf["#learninghub"]["courses"]:
+    for row in c.fetchall():
         Course.objects.create(
-            key=int(course["key"]),
-            title=course["title"],
-            link=course["link"],
-            desc=course["desc"] if "desc" in course and course["desc"] != "" else "This course doesn't have a description."
+            key=row[4],
+            title=row[1],
+            link=row[3],
+            desc=row[2]
         )

@@ -13,6 +13,7 @@ from django.core.wsgi import get_wsgi_application
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "prompt.settings")
 
+# Make static files accessible on heroku
 from whitenoise.django import DjangoWhiteNoise
 
 application = DjangoWhiteNoise(get_wsgi_application())

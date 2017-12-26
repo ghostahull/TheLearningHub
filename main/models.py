@@ -1,8 +1,10 @@
 from django.db import models
 
-
 class Course(models.Model):
     key = models.IntegerField(blank=False)
-    title = models.CharField(max_length=100, blank=False)
+    title = models.TextField()
     desc = models.TextField()
-    link = models.CharField(max_length=300, blank=False)
+    link = models.TextField()
+
+    def __str__(self):
+        return self.title

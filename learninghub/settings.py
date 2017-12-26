@@ -83,13 +83,34 @@ WSGI_APPLICATION = 'learninghub.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
+# Local information
+"""
+Dump local database:
+pg_dump -Fc --no-acl --no-owner -h localhost -U thelearninghub_admin thelearninghub > thelearninghub.dump
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'thelearninghub',
+        'USER': 'thelearninghub_admin',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': 5432,
     }
 }
+"""
 
+# Heroku's custom database
+"""
+Restore dump to Heroku:
+heroku pg:backups:restore 'http://comp.st/LINK' postgresql-concave-62685 -a thelearninghub --confirm
+"""
+
+import dj_database_url
+
+DATABASES = {
+    'default': dj_database_url.parse("postgres://ulsqobzojookfh:b7a53249cc86083daf551d6e9d45c3ab165637030377f090f01ee4490cb80669@ec2-23-21-186-138.compute-1.amazonaws.com:5432/d5h8kcam6auolb")
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
